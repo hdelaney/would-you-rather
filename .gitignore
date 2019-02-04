@@ -2,7 +2,9 @@
 
 # dependencies
 /node_modules
+/stories
 /.pnp
+.storybook
 .pnp.js
 
 # testing

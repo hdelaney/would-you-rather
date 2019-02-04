@@ -1,32 +1,238 @@
-.App {
+/*TODO: Refactor CSS so Ids aren't used, only classes, per Udacity guidelines*/
+/*TODO: Make sure shorthand is used where possible*/
+/*TODO: No unit values after 0s, and include leading 0s for decimal points (0.8 not .8)*/
+/*TODO: Use three characted hex code for colors where possible*/
+/*TODO: seaprate class name words with a -*/
+
+
+
+/* SITEWIDE AND LARGE CONTAINERS */
+
+
+html {
+	font-family: "Nunito Sans", "Helvetica", sans-serif;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+
+.body-container {
+	padding: 0;
+	margin: 0;
+}
+
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+
+.app-container {
+	width: 60%;
+	margin: auto;
+}
+
+
+.zero-top-margin {
+	margin-top: 0;
+}
+
+
+/* STARTING PLACE FOR BUTTONS AND RESETS */
+
+
+.dflt-button {
+  display: inline-block;
+  border: none;
+  padding: .75rem 1.5rem;
+  margin: 0;
+  text-decoration: none;
+  background: rgb(52, 178, 178);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
   text-align: center;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+
+.dflt-button:hover,
+.dflt-button:focus {
+    background: rgb(186, 222, 222);
+    outline: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.dflt-button:focus {
+    background: rgb(34, 119, 119);
+    outline: none;
 }
 
-.App-link {
-  color: #61dafb;
+.ul-list-reset {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+/* INFO DISPLAY "CARDS" */
+
+
+.strd-card {
+	width: 90%;
+	padding: 25px;
+	margin: 5%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: white;
+}
+
+
+.list-card {
+	width: 90%;
+	padding: 15px;
+	margin: 5%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: white;
+}
+
+
+/* LOGIN SPECIFIC */
+
+
+.login-select {
+	width: 55%;
+	height: 25px;
+}
+
+
+.login-select:focus {
+	outline-color: rgb(186, 222, 222);
+}
+
+
+.login-card {
+	text-align: center;
+}
+
+
+/* NAVIGATION */
+
+
+.nav {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: rgb(179, 179, 179);
+}
+
+
+.nav-item {
+	padding: 15px;
+	color: #fff;
+	text-decoration: none;
+}
+
+
+.nav-item:hover {
+	color: rgb(161, 18, 89);
+}
+
+
+.nitem-push {
+	margin-left: auto;
+}
+
+
+.active-nav {
+	font-weight: bold;
+}
+
+
+/* ANSWERED AND UNANSWERED BUTTONS */
+
+
+.auq-button-wrapper {
+	margin: 5%;
+	display: flex;
+	justify-content: flex-start;
+}
+
+
+.auq-button {
+	width: 50%;
+	height: 60px;
+	font-size: .75em;
+	border: 3px solid white;
+	text-transform: uppercase;
+}
+
+
+/* QUESTION AND POLL CARDS */
+
+
+.qwrap-flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-left: 0;
+}
+
+
+.question-wrapper {
+	flex: 1 1 20em;
+	padding-left: 25px;
+	padding-bottom: 25px;
+}
+
+
+.avatar-wrapper {
+	flex: 1 1 200px;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	justify-content: center;
+}
+
+
+.avatar {
+	width: 100%;
+}
+
+
+.vote-stat {
+	font-style: italic;
+	font-size: .75em;
+}
+
+
+.add-question-input {
+	width: 90%;
+	padding: 15px 20px;
+	font-size: .75em;
+}
+
+
+.add-question-input:focus {
+	outline-color: rgb(186, 222, 222);
+}
+
+
+/* RESPONSIVE MEDIA QUERIES BREAKPOINTS */
+
+
+@media only screen and (max-width: 525px) {
+  .app-container {
+  	width: 100%;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
+
