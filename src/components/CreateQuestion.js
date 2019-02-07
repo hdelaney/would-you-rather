@@ -7,49 +7,40 @@ import { handleAddQuestion } from '../actions/shared';
 
 class CreateQuestion extends Component {
 	state = {
-		text1: '',
-		text2: '',
+		optionOne: '',
+		optionTwo: '',
 		toHome: false
 	}
 
-	handleText1Change = (e) => {
-		const text1 = e.target.value;
-		this.setState(() => ({
-			text1
-		}));
-	}
 
-	handleText2Change = (e) => {
-		const text2 = e.target.value;
-		this.setState(() => ({
-			text2
-		}));
+	handleTextChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
 	}
 
 
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		const { text1, text2 } = this.state;
+		const { optionOne, optionTwo } = this.state;
 		const { dispatch } = this.props;
 
-		dispatch(handleAddQuestion(text1, text2));
+		dispatch(handleAddQuestion(optionOne, optionTwo));
 
 		this.setState((prevState) => ({
-			text1: '',
-			text2: '',
+			optionOne: '',
+			optionTwo: '',
 			toHome: !prevState.toHome
 		}));
 	}
 
 	render() {
 
-		const { text1, text2, toHome } = this.state;
+		const { optionOne, optionTwo, toHome } = this.state;
 		const { loggedUser } = this.props;
+		console.log(loggedUser);
 
-		if (loggedUser === null) {
-			return <Redirect from='/add' to='/login' exact={true} />
-		}
 
 		if (toHome === true) {
 			return <Redirect from='/add' to='/' exact={true} />
@@ -67,8 +58,8 @@ class CreateQuestion extends Component {
 							type='text'
 							name='optionOne'
 							className='add-question-input'
-							value={text1}
-							onChange={this.handleText1Change}
+							value={optionOne}
+							onChange={this.handleTextChange}
 						/>
 						<br/><br/>
 					</label>
@@ -78,14 +69,14 @@ class CreateQuestion extends Component {
 							type='text'
 							name='optionTwo'
 							className='add-question-input'
-							value={text2}
-							onChange={this.handleText2Change}
+							value={optionTwo}
+							onChange={this.handleTextChange}
 						/>
 						<br/><br/>
 					</label>
 					<button
 						type='submit'
-						disabled={text1 === '' && text2 === ''}
+						disabled={optionOne === '' && optionTwo === ''}
 						className='dflt-button'
 					>
 						Submit Question

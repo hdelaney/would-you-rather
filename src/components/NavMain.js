@@ -9,32 +9,23 @@ class NavMain extends Component {
 
 	handleLogoutClick = (e) => {
 		e.preventDefault();
-		const { dispatch } = this.props;
+		const { dispatch, fakeAuth, history } = this.props;
 		dispatch(logoutUser());
+		fakeAuth.signout(() => history.push('/'));
 	}
 
 	render() {
 
 		const { loggedUser } = this.props;
 
-		const userLinks = (
-			<div className='nav'>
-				<NavLink to='/' exact className='nav-item' activeClassName='active-nav'>
-					Home
-				</NavLink>
-				<NavLink to='/add' exact className='nav-item' activeClassName='active-nav'>
-					New Question
-				</NavLink>
-				<NavLink to='/leaderboard' className='nav-item' activeClassName='active-nav'>
-					Leader Board
-				</NavLink>
-				<NavLink to='/login' exact onClick={this.handleLogoutClick} className='nav-item nitem-push'>
-					Logout {loggedUser}
-				</NavLink>
-			</div>
-		)
 
-		const guestLinks = (
+		const userNameAndLogout = (
+			<NavLink to='/login' exact onClick={this.handleLogoutClick} className='nav-item nitem-push'>
+				Logout {loggedUser}
+			</NavLink>
+		);
+
+		return (
 			<div className='nav'>
 				<NavLink to='/' exact className='nav-item' activeClassName='active-nav'>
 					Home
@@ -45,24 +36,16 @@ class NavMain extends Component {
 				<NavLink to='/leaderboard' className='nav-item' activeClassName='active-nav'>
 					Leader Board
 				</NavLink>
-				<NavLink to='/login' className='nav-item nitem-push' activeClassName='active-nav'>
-					Login
-				</NavLink>
+				{loggedUser && userNameAndLogout}
 			</div>
-		)
-
-		return (
-			<div>
-				{ loggedUser ? userLinks : guestLinks }
-			</div>
-		)
+		);
 	}
 }
 
 
 function mapStateToProps({loggedUser}) {
 	return {
-		loggedUser
+		loggedUser: loggedUser ? loggedUser : null
 	}
 }
 

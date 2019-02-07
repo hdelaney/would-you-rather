@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 // used for the individual questions diplayed by Dashboard
@@ -49,4 +49,4 @@ function mapStateToProps ({ users, questions }, { id }) {
 	}
 }
 
-export default withRouter(connect(mapStateToProps)(DashQuestionCard));
+export default connect(mapStateToProps)(DashQuestionCard);

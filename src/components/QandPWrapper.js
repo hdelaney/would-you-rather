@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import AnswerQuestionCard from './AnswerQuestionCard';
 import PollCard from './PollCard';
+import ErrorMessage from './ErrorMessage';
 
 
 //wrapper for determining whether a clicked QuestionCard is associated with
 //an answered question (display a PollCard)
 //or an unaswered question (display an AnswerQuestionCard)
-class QandPWrapper extends Component {
+const QandPWrapper = (props) => {
 
-	state = {
-		answered: false
-	}
+		const { id, question, answered } = props;
 
-	render() {
-
-		const { id, answered, loggedUser } = this.props;
-
-		if (loggedUser === null) {
-			return <Redirect from='/' to='/login' exact={true} />
+		if ( question === null ) {
+			return <ErrorMessage />
 		}
 
 		return (
@@ -31,7 +25,6 @@ class QandPWrapper extends Component {
 					)}
 			</div>
 		)
-	}
 }
 
 function mapStateToProps({ loggedUser, questions }, props) {
@@ -51,7 +44,6 @@ function mapStateToProps({ loggedUser, questions }, props) {
 	return {
 		id,
 		answered,
-		loggedUser: loggedUser ? loggedUser : null,
 		question: question ? question : null
 	}
 }

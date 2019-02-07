@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 class LeaderBoard extends Component {
@@ -11,11 +11,8 @@ class LeaderBoard extends Component {
 	//sum and sorting is done in mapStateToProps
 	render() {
 
-		const { loggedUser, leaderArray } = this.props;
+		const { leaderArray } = this.props;
 
-		if (loggedUser === null) {
-			return <Redirect from='/leaderboard' to='/login' exact={true} />
-		}
 
 		return (
 			<ul className='ul-list-reset'>
@@ -58,10 +55,9 @@ function mapStateToProps ({ loggedUser, users }) {
 	))
 
 	return {
-		loggedUser: loggedUser ? loggedUser : null,
 		leaderArray: leaderArray.sort((a,b) => b.totalCount - a.totalCount)
 	}
 
 }
 
-export default connect(mapStateToProps)(LeaderBoard);
+export default withRouter(connect(mapStateToProps)(LeaderBoard));

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { loginLoggedUser } from '../actions/loggedUser';
 
 //Login page with dropdown for selecting user
@@ -8,15 +8,21 @@ import { loginLoggedUser } from '../actions/loggedUser';
 //Application will reroute to /login
 class LoginPage extends Component {
 
+
 	state = {
-		username: 'johndoe'
-	}
+		username: 'johndoe',
+    redirectToReferrer: false
+  }
+
 
 	handleSubmit = (e) => {
 		e.preventDefault();
 		let { username } = this.state;
-		const { dispatch } = this.props;
-		dispatch(loginLoggedUser(username));
+		const { loginUser, fakeAuth } = this.props;
+		loginUser(username);
+		fakeAuth.authenticate(() => {
+      this.setState({ redirectToReferrer: true })
+    });
 	}
 
 	handleChange = (e) => {
@@ -29,11 +35,13 @@ class LoginPage extends Component {
 
 	render() {
 
-		let { loggedIn } = this.props;
+		let { redirectToReferrer } = this.state;
 
-		if ( loggedIn ) {
-			return <Redirect to='/' />
-		}
+		let { from } = this.props.location.state || { from: { pathname: '/' } };
+    console.log(from);
+    console.log(this.props);
+
+    if (redirectToReferrer) return <Redirect to={ from } />;
 
 		return (
 			<div className='strd-card login-card'>
@@ -57,10 +65,11 @@ class LoginPage extends Component {
 	}
 }
 
-function mapStateToProps({ loggedUser }) {
+
+function mapDispatchToProps (dispatch) {
 	return {
-		loggedIn: loggedUser
+		loginUser: (username) => dispatch(loginLoggedUser(username))
 	}
 }
 
-export default connect(mapStateToProps)(LoginPage);
+export default withRouter(connect(null, mapDispatchToProps)(LoginPage));

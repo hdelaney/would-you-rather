@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import DashQuestionCard from './DashQuestionCard';
 
 
@@ -32,10 +32,6 @@ class Dashboard extends Component {
 	//Unaswered questions display by default
 	render() {
 		let { loggedUser, questionsArray } = this.props;
-
-    if ( loggedUser === null) {
-      return <Redirect from='/' to='/login' exact={true} />
-    }
 
 		return (
 			<div>
