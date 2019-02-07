@@ -57,9 +57,6 @@ function mapStateToProps({ loggedUser, users, questions }, props) {
 	const { id } = props;
 	const userAnswer = users[loggedUser].answers[id];
 
-	console.log(users[loggedUser]);
-	console.log(userAnswer);
-
 	const question = questions[id];
 	const author = users[question.author];
 	const avatar = author.avatarURL;

@@ -38,8 +38,6 @@ class CreateQuestion extends Component {
 	render() {
 
 		const { optionOne, optionTwo, toHome } = this.state;
-		const { loggedUser } = this.props;
-		console.log(loggedUser);
 
 
 		if (toHome === true) {
@@ -88,10 +86,4 @@ class CreateQuestion extends Component {
 }
 
 
-function mapStateToProps({ loggedUser }) {
-	return {
-		loggedUser: loggedUser ? loggedUser : null
-	}
-}
-
-export default connect(mapStateToProps)(CreateQuestion);
+export default connect()(CreateQuestion);
